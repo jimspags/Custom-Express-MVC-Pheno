@@ -1,6 +1,9 @@
 // Base model
 class BaseModel {
     constructor(table) {
+        // Set table name
+        this.table = table;
+
         // Require mysql node module
         this.mysql = require("mysql");
 
@@ -11,12 +14,11 @@ class BaseModel {
         this.connection = this.connectionString();
 
         // Connect
-        this.connection.connect(function(err) {
-            if (err) throw err;
+        this.connection.connect(function(error) {
+            if (error){
+                console.error(error);
+            }
         });
-
-        // Set table name
-        this.table = table;
     }
 
     // Create connection then pass to this.connection variable
@@ -35,16 +37,34 @@ class BaseModel {
     executeQuery(query) {
         return new Promise((resolve, reject) => {
             this.connection.query(query, function(error, result) {
-                resolve(result);
+                if(error) {
+                    reject(error)
+                } else {
+                    resolve(result);
+                }
             });
         })
     }
 
-    // Fetch all from table
-    async fetchAll() {
-        var query = `SELECT * FROM ${this.table}`;
-        var result = await this.executeQuery(query);
-        return result;
+    // Query functions can be used
+    // Get all data
+    fetchAll() {
+        try {
+            var query = `SELECT * FROM ${this.table}`;
+            return this.executeQuery(query);
+        } catch(error) {
+            console.error(error);
+        }
+    }
+
+    // Get data by id
+    fetchById(id) {
+        try {
+            var query = `SELECT * FROM ${this.table} WHERE id = ${id}`;
+            return this.executeQuery(query);
+        } catch(error) {
+            console.error(error);
+        } 
     }
 
 

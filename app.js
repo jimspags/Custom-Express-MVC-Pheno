@@ -2,6 +2,17 @@
 const express = require("express");
 const app = express();
 
+// Initialize Session
+var session = require('express-session');
+
+// Use session
+app.use(session({
+  secret: 'keyboardkitteh',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 60000 }
+}))
+
 // Initialize Routes
 const routes = require("./routes");
 app.use(routes);
