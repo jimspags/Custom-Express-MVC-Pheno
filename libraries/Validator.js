@@ -115,7 +115,7 @@ class Validator {
     // Duplicate checcker and must use async await
     async Unique(fields, rules) {
         // Get the base model to use as database and execute query
-        const BaseModel = require("../models/BaseModel");
+        const BaseModel = require("../base/BaseModel");
         const database = new BaseModel();
 
         // Loop each field that set as unique
