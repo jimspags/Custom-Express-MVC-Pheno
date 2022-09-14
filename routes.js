@@ -9,16 +9,6 @@ router.use(bodyParser.urlencoded({extended: true}));
 // Add your routes below
 
 
-
-
-
-
-
-
-
-
-
-
 // Initialize Template Controller
 const SampleController = require("./controllers/SampleController");
 

@@ -21,9 +21,6 @@ app.use(routes);
 app.use(express.static(__dirname + "/views"));
 app.use(express.static(__dirname + "/assets"));
 
-// Initialize body parser for post data handling
-const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({extended: true}));
 
 // Set view engine as EJS
 app.set("view engine", "ejs");
